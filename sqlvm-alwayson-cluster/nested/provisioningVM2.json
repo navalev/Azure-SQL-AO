@@ -70,16 +70,7 @@
     },
     "vmContainerName": {
       "type": "string"
-    },
-    "sqlImagePublisher": {
-      "type": "string"
-    },
-    "sqlImageOffer": {
-      "type": "string"
-    },
-    "sqlImageSKU": {
-      "type": "string"
-    },
+    },  
     "domainName": {
       "type": "string"
     },
@@ -91,6 +82,12 @@
     },
     "sqlwNicName": {
       "type": "string"
+    },
+	"sqlImageUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Uri of the existing VHD in ARM standard or premium storage"
+      }
     }
   },
   "variables": {
@@ -299,15 +296,13 @@
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "[parameters('sqlImagePublisher')]",
-            "offer": "[parameters('sqlImageOffer')]",
-            "sku": "[parameters('sqlImageSKU')]",
-            "version": "latest"
-          },
+        "storageProfile": {         
           "osDisk": {
             "name": "osdisk",
+			"osType" : "Windows",
+			"image": {
+              "uri": "[parameters('sqlImageUri')]"
+            },
             "vhd": {
               "uri": "[concat('http://',variables('sqlstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('sqlVMName'), copyindex(), '-osdisk.vhd')]"
             },
