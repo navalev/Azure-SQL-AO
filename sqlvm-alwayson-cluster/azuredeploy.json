@@ -741,16 +741,7 @@
           },
           "fswImageSKU": {
             "value": "[variables('vmSettings').windowsImageSKU]"
-          },
-          "sqlImagePublisher": {
-            "value": "[variables('vmSettings').sqlImagePublisher]"
-          },
-          "sqlImageOffer": {
-            "value": "[variables('vmSettings').sqlImageOffer]"
-          },
-          "sqlImageSKU": {
-            "value": "[variables(parameters('sqlServerVersion'))]"
-          },
+          },          
           "witnessVMSize": {
             "value": "[parameters('witnessVMSize')]"
           },
