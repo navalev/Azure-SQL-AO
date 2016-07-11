@@ -466,7 +466,7 @@
       "nicTemplateURL": "[concat(parameters('templatesBaseUrl'),'/nic.json')]",
       "rdpIPAdressSetupURL": "[concat(parameters('templatesBaseUrl'),'/publicip-rdp.json')]",
       "vnetSetupURL": "[concat(parameters('templatesBaseUrl'),'/vnet-new.json')]",
-      "setupLBsUrl": "[concat(parameters('templatesBaseUrl'),'/setupLBs.json')]",
+      "setupLBsUrl": "[concat(parameters('templatesBaseUrl'),'/setupLBs-i.json')]",
       "creatingNicsUrl": "[concat(parameters('templatesBaseUrl'),'/creatingNICS.json')]",
       "storageAccountVirtualNetworkPublicIP": "[concat(parameters('templatesBaseUrl'),'/storageAccountVirtualNetworkPublicIP.json')]",
       "provisioningVMs": "[concat(parameters('templatesBaseUrl'),'/provisioningVM',parameters('numberOfSqlVMDisks'),'.json')]",
