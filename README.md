@@ -13,9 +13,11 @@ $destContext = New-AzureStorageContext  –StorageAccountName $storageAccount -S
 New-AzureStorageContainer -Name $containerName -Context $destContext 
 $blob1 = Start-AzureStorageBlobCopy -srcUri $srcUri -DestContainer $containerName -DestBlob $destBlob -DestContext $destContext
 ```
-3.[Create a Virtual Network with 2 subnets](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vnet-two-subnets)
+3.[Create a VM from an image - select if to create new vnet or use existing](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image)
 
-4.[Create a VM from an existing VHD in an exsiting VNET](./vm-from-vhd-existing-vnet.json)
+4.[Create a Virtual Network with 2 subnets](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vnet-two-subnets)
+
+5.[Create a VM from an existing VHD in an exsiting VNET](./vm-from-vhd-existing-vnet.json)
 
 ## How-to
 [Deploy templates](https://azure.microsoft.com/en-us/documentation/articles/resource-group-template-deploy/)
