@@ -575,7 +575,8 @@
       "apiVersion": "2015-01-01",
       "comments": "Create Load Balancers for SQL and DC",
       "dependsOn": [
-        "Microsoft.Resources/deployments/StorageAccountVirtualNetworkPublicIP"
+        "Microsoft.Resources/deployments/VirtualNetwork",
+		"Microsoft.Resources/deployments/StorageAccountPublicIP",
       ],
       "properties": {
         "mode": "Incremental",
