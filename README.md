@@ -9,7 +9,7 @@ The [deploy.ps](./deploy.ps1) script performs the following:
 Execution Example:
 ```ps
 .\deploy.ps1 -DeploymentName dep01 -ResourceGroup RG01 -NewStorageAccountName test14aostore1307 -NewContainerName images -Location westeurope -SourceStorageAccount rg16986 -SourceStorageKey <source image storage account key> -SourceContainerName images -SourceBlobName image01.vhd -DestBlobName baseimage.vhd 
-``
+```
 
 ## Templates
 1.[Capture an Azure VM](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-capture-image/)
