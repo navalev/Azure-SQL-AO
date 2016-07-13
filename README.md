@@ -4,8 +4,8 @@
 2.Copy Azure blob with Powershell:
 ```powershell
 $srcUri = "uri for source blob"
-$storageAccount = "source storage acocunt name"
-$storageKey = "source storage account key"
+$storageAccount = "destination storage acocunt name"
+$storageKey = "destination storage account key"
 $containerName = "destination container name"
 $destBlob = "destination blob name"
 
