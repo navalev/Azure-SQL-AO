@@ -2,6 +2,13 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+   "newOrExistingVnet": {
+      "allowedValues": [ "new", "existing" ],
+      "type": "string",
+      "metadata": {
+        "description":  "Select if this template needs a new VNet or will reference an existing VNet"
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -474,7 +481,8 @@
       "vnetSetupURL": "[concat(parameters('templatesBaseUrl'),'/vnet-new.json')]",
       "setupLBsUrl": "[concat(parameters('templatesBaseUrl'),'/setupLBs-i.json')]",
       "creatingNicsUrl": "[concat(parameters('templatesBaseUrl'),'/creatingNICS.json')]",
-      "storageAccountVirtualNetworkPublicIP": "[concat(parameters('templatesBaseUrl'),'/storageAccountVirtualNetworkPublicIP.json')]",
+	  "virtualNetwork": "[concat(parameters('templatesBaseUrl'),'/', parameters('newOrExistingVnet'), 'VirtualNetwork.json')]",
+      "storageAccountPublicIP": "[concat(parameters('templatesBaseUrl'),'/storageAccountPublicIP.json')]",
       "provisioningVMs": "[concat(parameters('templatesBaseUrl'),'/provisioningVM',parameters('numberOfSqlVMDisks'),'.json')]",
       "configuringBackupADVM": "[concat(parameters('templatesBaseUrl'),'/configuringBackupADVM.json')]",
       "preparingAlwaysOnSqlServer": "[concat(parameters('templatesBaseUrl'),'/preparingSqlServer.json')]",
@@ -493,14 +501,14 @@
   },
   "resources": [
     {
-      "name": "StorageAccountVirtualNetworkPublicIP",
+      "name": "StorageAccountPublicIP",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "comments": "This resource will create storage accounts for Active Directory, SQL Server, File Share Witness and Diagnostics. It will also create the Virtual Network and public IP addresses",
+      "comments": "This resource will create storage accounts for Active Directory, File Share Witness and Diagnostics. It will also create public IP addresses",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('configuration').storageAccountVirtualNetworkPublicIP]",
+          "uri": "[variables('configuration').storageAccountPublicIP]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -530,7 +538,25 @@
           },
           "sql0AddressNameWithSuffix": {
             "value": "[variables('sql0AddressNameWithSuffix')]"
-          },
+          }          
+        }
+      }
+    },
+	{
+      "name": "VirtualNetwork",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "comments": "This resource will a virtual network",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('configuration').virtualNetwork]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[resourceGroup().location]"
+          },          
           "virtualNetworkName": {
             "value": "[variables('virtualNetworkNameWithSuffix')]"
           },

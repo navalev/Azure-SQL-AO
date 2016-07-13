@@ -16,16 +16,7 @@
     },
     "DcStorageAccountType": {
       "type": "string"
-    },
-    "virtualNetworkName": {
-      "type": "string"
-    },
-    "virtualNetworkAddressRange": {
-      "type": "string"
-    },
-    "subnets": {
-      "type": "array"
-    },
+    },    
     "primaryDCIPAddressNameWithSuffix": {
       "type": "string"
     },
@@ -39,16 +30,7 @@
       "type": "string"
     }
   },
-  "resources": [
-    {
-      "name": "[parameters('sqlStorageAccountName')]",
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2015-05-01-preview",
-      "location": "[parameters('location')]",
-      "properties": {
-        "accountType": "[parameters('SqlStorageAccountType')]"
-      }
-    },
+  "resources": [    
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[parameters('dcStorageAccountName')]",
@@ -110,20 +92,6 @@
       "location": "[parameters('location')]",
       "properties": {
         "publicIPAllocationMethod": "dynamic"
-      }
-    },
-    {
-      "name": "[parameters('virtualNetworkName')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[parameters('virtualNetworkAddressRange')]"
-          ]
-        },
-        "subnets": "[parameters('subnets')]"
       }
     }
   ],
