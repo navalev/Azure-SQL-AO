@@ -91,6 +91,12 @@
     },
     "sqlwNicName": {
       "type": "string"
+    },
+	"sqlImageUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Uri of the existing SQL Server VM vhd image"
+      }
     }
   },
   "variables": {
@@ -363,14 +369,12 @@
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
-          "imageReference": {
-            "publisher": "[parameters('sqlImagePublisher')]",
-            "offer": "[parameters('sqlImageOffer')]",
-            "sku": "[parameters('sqlImageSKU')]",
-            "version": "latest"
-          },
           "osDisk": {
             "name": "osdisk",
+			"osType" : "Windows",
+			"image": {
+              "uri": "[parameters('sqlImageUri')]"
+            },
             "vhd": {
               "uri": "[concat('http://',variables('sqlstorageName'),'.blob.core.windows.net/',parameters('vmContainerName'),'/',parameters('sqlVMName'), copyindex(), '-osdisk.vhd')]"
             },

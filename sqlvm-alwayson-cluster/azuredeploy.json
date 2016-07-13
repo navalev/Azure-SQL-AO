@@ -375,7 +375,7 @@
 	"sqlImageUri": {
       "type": "string",
       "metadata": {
-        "description": "Uri of the existing VHD in ARM standard or premium storage"
+        "description": "Uri of the existing SQL Server VM vhd image"
       }
     }
   },
