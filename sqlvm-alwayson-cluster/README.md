@@ -1,16 +1,6 @@
-In editing
-SQL Server VMs use a user image 
-
-
-# Solution name
-
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fnavalev%2FAzure-SQL-AO%2Fmaster%2Fsqlvm-alwayson-cluster%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fnavalev%2FAzure-SQL-AO%2Fmaster%2Fsqlvm-alwayson-cluster%2Fazuredeploy.json" target="_blank">
-<img src="http://armviz.io/visualizebutton.png"/>
-</a>
-
 
 This template deploys a **SQL SERVER AlwaysOn Cluster**. The **SQL SERVER AlwaysOn Cluster** is a **SQL Server AlwaysOn Availability Group for high availability of SQL Server. It provisions 2 SQL Server replicas (primary and secondary) and 1 witness file share in a Windows Cluster. It also provisions 2 Domain Controller replicas (primary and secondary). In addition, it configures an Availability Group Internal Listener for clients to connect to the primary SQL Server replica. The diagram below shows the deployment according to the default settings of this feature. The deployment will look slightly different depending on the settings specified by the user.
 This template deploys an AlwaysOn Availability Group such that after deployment is complete, the user has a fully available AG. The template implements performance, security, and availability best practices.**
@@ -19,17 +9,16 @@ This template deploys an AlwaysOn Availability Group such that after deployment 
 
 ## Solution overview and deployed resources
 
-This is an overview of the solution
+The SQL Server instances will create created from a user image, and not using the SQL Server tempalte from the Azure MarketPlace.
 
-This template will create a SQL Server 2014/2012 Always On Availability Group using the PowerShell DSC Extension it creates the following resources:
-
-+	A Virtual Network
-+	Four Storage Accounts one is used for AD VMs, one for SQL Server VMs , one for Failover Cluster File Share Witness and one for Deployment diagnostics
-+	One internal load balancer
+This template will create:
++	A Virtual Network: you may use an existing template by using the "exisitng" parameter value
++	3 Storage Accounts one is used for AD VMs, one for Failover Cluster File Share Witness and one for Deployment diagnostics
++	One internal load balancer. The deployment receives a storage account name to be used for the SQL Server instances, and assumes it is already created
 +	A load balancer rule for ILB for a SQL Listener
 + 	Four public IP addresses for Primary Domain Controller, Secondary Domain Controller, Primary SQL Server and Secondary SQL Server
 +	Two VMs as Domain Controllers for a new Forest and Domain
-+	Two VMs in a Windows Server Cluster running SQL Server 2014/2012 with an availability group, an additional VM acts as a File Share Witness for the Cluster
++	Two VMs in a Windows Server Cluster running SQL Server 2014/2012/2016 (from a user image) with an availability group, an additional VM acts as a File Share Witness for the Cluster
 +	Two Availability Sets one for the AD VMs, one for the SQL and Witness VMs
 
 ## Notes
