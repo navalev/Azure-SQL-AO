@@ -149,8 +149,7 @@
       "type": "string",
       "metadata": {
         "description": "The SQL Server Service Account name"
-      },
-      "defaultValue": "sqlservice"
+      },      
     },
     "sqlServerServiceAccountPassword": {
       "type": "securestring",
@@ -345,7 +344,7 @@
       "metadata": {
         "description": "The Sql Server Version"
       },
-      "defaultValue": "SQL2014SP1-WS2012R2"
+      "defaultValue": "SQL2016-WS2012R2"
     },
     "numberOfSqlVMDisks": {
       "type": "string",
