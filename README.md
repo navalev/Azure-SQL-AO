@@ -1,3 +1,16 @@
+## Deployment Powershell scripts
+
+The [deploy.ps](./deploy.ps1) script performs the following:
++ Create a resource group
++ Create a premium storage account for the SQL Server instances
++ Copies a user image to the new creates storage account. This is a mandatory step, since at the time of writing this, in ARM if you wish to provision a VM from a user image, the VHD have to be in the **same** storage account as the targeted VM.
++ Deploy the [sqlvm-alwayson-cluster](./sqlvm-alwayson-cluster) templates
+
+Execution Example:
+```ps
+.\deploy.ps1 -DeploymentName dep01 -ResourceGroup RG01 -NewStorageAccountName test14aostore1307 -NewContainerName images -Location westeurope -SourceStorageAccount rg16986 -SourceStorageKey <source image storage account key> -SourceContainerName images -SourceBlobName image01.vhd -DestBlobName baseimage.vhd 
+``
+
 ## Templates
 1.[Capture an Azure VM](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-capture-image/)
 
