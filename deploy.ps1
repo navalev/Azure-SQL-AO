@@ -10,5 +10,19 @@ $SourceStorageContext = New-AzureStorageContext  –StorageAccountName $SourceSt
 # copy base image to the new create storage
 $BlobCopy = Start-CopyAzureStorageBlob -Context $SourceStorageContext -SrcContainer $SourceContainerName -SrcBlob $SourceBlobName -DestContext $storage.Context -DestContainer $NewContainerName -DestBlob $DestBlobName
 
+### Retrieve the current status of the copy operation ###
+$status = $BlobCopy | Get-AzureStorageBlobCopyState 
+ 
+### Print out status ### 
+$status 
+ 
+### Loop until complete ###                                    
+While($status.Status -eq "Pending"){
+  $status = $BlobCopy | Get-AzureStorageBlobCopyState 
+  Start-Sleep 10
+  ### Print out status ###
+  $status
+}
+
 # deploy alwaysOn templates
 New-AzureRmResourceGroupDeployment -Name $DeploymentName -ResourceGroupName $rg.ResourceGroupName -TemplateUri "https://raw.githubusercontent.com/navalev/Azure-SQL-AO/master/sqlvm-alwayson-cluster/azuredeploy.json" -sqlStorageAccountName $NewStorageAccountName -sqlImageUri $BlobCopy.ICloudBlob.SnapshotQualifiedStorageUri.PrimaryUri.AbsoluteUri
