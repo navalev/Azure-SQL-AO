@@ -1,3 +1,16 @@
+## Change SQL Serve Collation in Azure SQLServer 2016 VM
+
+In Azure, the SQL Server installation media is location at:
+**C:\Program Files\Microsoft SQL Server\130\Setup Bootstrap\SQLServer2016**
+
+Execute the follwing command:
+```
+Setup /QUIET /ACTION=REBUILDDATABASE /INSTANCENAME=MSSQLSERVER /SQLSYSADMINACCOUNTS=<admin user> /SAPWD=<password> /SQLCOLLATION=Latin1_General_CI_AS_KS
+
+```
+[source](http://blog.sqlauthority.com/2016/04/05/sql-server-change-sql-server-collation-microsoft-azure-vm-iaas/)
+
+
 ## Deployment Powershell scripts
 
 The [deploy.ps](./deploy.ps1) script performs the following:
