@@ -24,5 +24,3 @@ While($status.Status -eq "Pending"){
   $status
 }
 
-# deploy alwaysOn templates
-New-AzureRmResourceGroupDeployment -Name $DeploymentName -ResourceGroupName $rg.ResourceGroupName -TemplateUri "https://raw.githubusercontent.com/navalev/Azure-SQL-AO/master/sqlvm-alwayson-cluster/azuredeploy.json" -sqlStorageAccountName $NewStorageAccountName -sqlImageUri $BlobCopy.ICloudBlob.SnapshotQualifiedStorageUri.PrimaryUri.AbsoluteUri
